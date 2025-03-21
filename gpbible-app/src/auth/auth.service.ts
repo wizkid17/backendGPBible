@@ -9,6 +9,8 @@ import { CreateAccountDto } from './dto/create-account.dto';
 import { InitiateEmailVerificationDto, VerifyEmailDto } from './dto/verify-email.dto';
 import { User } from '../users/entities/user.entity';
 import { VerificationCode } from './entities/verification-code.entity';
+import { SubscriptionsService } from '../subscriptions/subscriptions.service';
+import { SubscriptionType } from '../subscriptions/entities/subscription.entity';
 
 @Injectable()
 export class AuthService {
@@ -17,6 +19,7 @@ export class AuthService {
   constructor(
     private jwtService: JwtService,
     private usersService: UsersService,
+    private subscriptionsService: SubscriptionsService,
     @InjectRepository(VerificationCode)
     private verificationCodesRepository: Repository<VerificationCode>,
   ) {
@@ -214,5 +217,48 @@ export class AuthService {
     }
 
     return user;
+  }
+
+  async getAccessibleFeatures(userId: string) {
+    // Si no hay userId, asumimos que es un usuario no autenticado
+    if (!userId) {
+      return {
+        bible: true,
+        dailyBibleVerse: true,
+        todaysReflection: true,
+        menu: true,
+        premium: false,
+      };
+    }
+
+    try {
+      // Obtener la suscripción del usuario desde el servicio de suscripciones
+      const isPremium = await this.subscriptionsService.isUserPremium(userId);
+      
+      return {
+        bible: true,
+        dailyBibleVerse: true,
+        todaysReflection: true,
+        menu: true,
+        premium: isPremium,
+        // Características premium adicionales
+        premiumStudyPlans: isPremium,
+        advancedSearch: isPremium,
+        highlights: isPremium,
+        notes: isPremium,
+        devotionals: isPremium,
+        commentaries: isPremium,
+      };
+    } catch (error) {
+      console.error('Error fetching user features:', error);
+      // En caso de error, retornamos las características básicas
+      return {
+        bible: true,
+        dailyBibleVerse: true,
+        todaysReflection: true,
+        menu: true,
+        premium: false,
+      };
+    }
   }
 } 

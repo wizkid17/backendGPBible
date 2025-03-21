@@ -17,6 +17,9 @@ export class UserPreference {
   @ManyToOne(() => BibleVersion, bibleVersion => bibleVersion.userPreferences)
   bibleVersion: BibleVersion;
 
+  @Column({ nullable: true })
+  selectedAvatarId: string;
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 

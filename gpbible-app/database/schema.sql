@@ -76,6 +76,10 @@ CREATE TABLE IF NOT EXISTS onboarding_responses (
     spiritualPractices TEXT NOT NULL,
     dailyDevotionTime VARCHAR(50) NOT NULL,
     prayerFrequency VARCHAR(50) NOT NULL,
+    dedicationTime VARCHAR(50) NOT NULL,
+    preferredStudyMethods TEXT NOT NULL,
+    wantsProgressTracking BOOLEAN DEFAULT FALSE,
+    wantsPersonalizedRecommendations BOOLEAN DEFAULT FALSE,
     onboardingCompleted BOOLEAN DEFAULT FALSE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -95,6 +99,56 @@ CREATE TABLE IF NOT EXISTS verification_codes (
     PRIMARY KEY (id),
     INDEX IDX_verification_codes_email (email),
     INDEX IDX_verification_codes_code (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Crear tabla de preferencias de notificaciones
+CREATE TABLE IF NOT EXISTS notification_preferences (
+    id VARCHAR(36) NOT NULL,
+    userId VARCHAR(36) NOT NULL,
+    enabled BOOLEAN DEFAULT FALSE,
+    dailyVersesEnabled BOOLEAN DEFAULT TRUE,
+    prayerRemindersEnabled BOOLEAN DEFAULT TRUE,
+    studyRemindersEnabled BOOLEAN DEFAULT TRUE,
+    eventNotificationsEnabled BOOLEAN DEFAULT TRUE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY UK_notification_preferences_user (userId),
+    FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Crear tabla de suscripciones
+CREATE TABLE IF NOT EXISTS subscriptions (
+    id VARCHAR(36) NOT NULL,
+    userId VARCHAR(36) NOT NULL,
+    type ENUM('free', 'premium') DEFAULT 'free',
+    paymentId VARCHAR(255),
+    startDate TIMESTAMP NULL,
+    endDate TIMESTAMP NULL,
+    autoRenew BOOLEAN DEFAULT FALSE,
+    isCancelled BOOLEAN DEFAULT FALSE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY UK_subscriptions_user (userId),
+    FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Crear tabla de donaciones
+CREATE TABLE IF NOT EXISTS donations (
+    id VARCHAR(36) NOT NULL,
+    userId VARCHAR(36),
+    amount DECIMAL(10, 2) NOT NULL,
+    currency VARCHAR(3) NOT NULL,
+    transactionId VARCHAR(255),
+    status ENUM('pending', 'completed', 'failed', 'refunded') DEFAULT 'pending',
+    anonymousDonor BOOLEAN DEFAULT FALSE,
+    message TEXT,
+    email VARCHAR(255),
+    name VARCHAR(255),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (userId) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Crear índices adicionales
@@ -124,6 +178,9 @@ ALTER TABLE denominations COMMENT 'Tabla para almacenar las denominaciones relig
 ALTER TABLE bible_versions COMMENT 'Tabla para almacenar las diferentes versiones de la Biblia';
 ALTER TABLE user_preferences COMMENT 'Tabla para almacenar las preferencias de usuario';
 ALTER TABLE onboarding_responses COMMENT 'Tabla para almacenar las respuestas del proceso de onboarding';
+ALTER TABLE notification_preferences COMMENT 'Tabla para almacenar las preferencias de notificaciones';
+ALTER TABLE subscriptions COMMENT 'Tabla para almacenar las suscripciones de los usuarios';
+ALTER TABLE donations COMMENT 'Tabla para almacenar las donaciones realizadas';
 
 -- Permisos básicos
 GRANT SELECT, INSERT, UPDATE, DELETE ON gpbible.* TO 'admin2024'@'localhost';

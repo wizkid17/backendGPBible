@@ -1,4 +1,4 @@
-import { IsArray, IsString, IsNotEmpty, IsEnum } from 'class-validator';
+import { IsArray, IsString, IsNotEmpty, IsEnum, IsBoolean, IsOptional } from 'class-validator';
 
 export enum DailyDevotionTime {
   LESS_15_MIN = 'Menos de 15 minutos',
@@ -8,11 +8,24 @@ export enum DailyDevotionTime {
 }
 
 export enum PrayerFrequency {
-  MULTIPLE_TIMES_DAY = 'Varias veces al día',
-  ONCE_DAY = 'Una vez al día',
-  FEW_TIMES_WEEK = 'Algunas veces por semana',
-  ONCE_WEEK = 'Una vez por semana',
-  OCCASIONALLY = 'Ocasionalmente'
+  DAILY = 'daily',
+  WEEKLY = 'weekly',
+  OCCASIONALLY = 'occasionally',
+  RARELY = 'rarely'
+}
+
+export enum DedicationTime {
+  FIVE_MIN = '5min',
+  FIFTEEN_MIN = '15min',
+  THIRTY_MIN = '30min',
+  HOUR_PLUS = '60min+'
+}
+
+export enum StudyMethod {
+  DAILY_VERSES = 'Versículos diarios',
+  BIBLE_STUDIES = 'Estudios bíblicos',
+  GUIDED_PLANS = 'Planes de lectura guiados',
+  TOPICAL_STUDIES = 'Estudios temáticos'
 }
 
 export class CreateOnboardingResponseDto {
@@ -37,4 +50,34 @@ export class CreateOnboardingResponseDto {
 
   @IsEnum(PrayerFrequency)
   prayerFrequency: PrayerFrequency;
+  
+  @IsEnum(DedicationTime)
+  dedicationTime: DedicationTime;
+  
+  @IsArray()
+  preferredStudyMethods: StudyMethod[];
+  
+  @IsBoolean()
+  @IsOptional()
+  wantsProgressTracking: boolean = false;
+  
+  @IsBoolean()
+  @IsOptional()
+  wantsPersonalizedRecommendations: boolean = false;
+
+  @IsString()
+  @IsNotEmpty()
+  userId: string;
+
+  @IsString()
+  @IsOptional()
+  selectedAvatarId?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  onboardingCompleted: boolean = false;
+
+  @IsBoolean()
+  @IsOptional()
+  wantsTour: boolean = true;
 } 

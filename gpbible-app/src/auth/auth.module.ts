@@ -10,11 +10,13 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { VerificationCode } from './entities/verification-code.entity';
+import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
 
 @Module({
   imports: [
     UsersModule,
     PassportModule,
+    SubscriptionsModule,
     TypeOrmModule.forFeature([VerificationCode]),
     JwtModule.registerAsync({
       imports: [ConfigModule],

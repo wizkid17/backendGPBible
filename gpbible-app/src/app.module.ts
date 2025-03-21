@@ -9,12 +9,34 @@ import { DenominationsModule } from './denominations/denominations.module';
 import { BibleVersionsModule } from './bible-versions/bible-versions.module';
 import { UserPreferencesModule } from './user-preferences/user-preferences.module';
 import { OnboardingModule } from './onboarding/onboarding.module';
+import { NotificationsModule } from './notifications/notifications.module';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module';
+import { DonationsModule } from './donations/donations.module';
+import { AiChatModule } from './ai-chat/ai-chat.module';
+import { ImmersiveStoriesModule } from './immersive-stories/immersive-stories.module';
+import { AiAvatarsModule } from './ai-avatars/ai-avatars.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { MeditationModule } from './meditation/meditation.module';
+import { TourModule } from './tour/tour.module';
+import { SpiritualGrowthModule } from './spiritual-growth/spiritual-growth.module';
+import { SpiritualAssessmentModule } from './spiritual-assessment/spiritual-assessment.module';
 import { User } from './users/entities/user.entity';
 import { Denomination } from './denominations/entities/denomination.entity';
 import { BibleVersion } from './bible-versions/entities/bible-version.entity';
 import { UserPreference } from './user-preferences/entities/user-preference.entity';
 import { OnboardingResponse } from './onboarding/entities/onboarding-response.entity';
+import { NotificationPreference } from './notifications/entities/notification-preference.entity';
+import { Subscription } from './subscriptions/entities/subscription.entity';
+import { Donation } from './donations/entities/donation.entity';
 import { VerificationCode } from './auth/entities/verification-code.entity';
+import { AiAvatar } from './ai-avatars/entities/ai-avatar.entity';
+import { Meditation } from './meditation/entities/meditation.entity';
+import { TourStep } from './tour/entities/tour-step.entity';
+import { SpiritualGrowthTrack } from './spiritual-growth/entities/spiritual-growth-track.entity';
+import { SpiritualCheckIn } from './spiritual-growth/entities/spiritual-check-in.entity';
+import { SpiritualAssessment } from './spiritual-assessment/entities/spiritual-assessment.entity';
+import { SpiritualAssessmentQuestion } from './spiritual-assessment/entities/spiritual-assessment-question.entity';
+import { SpiritualAssessmentResponse } from './spiritual-assessment/entities/spiritual-assessment-response.entity';
 
 @Module({
   imports: [
@@ -36,7 +58,18 @@ import { VerificationCode } from './auth/entities/verification-code.entity';
           BibleVersion,
           UserPreference,
           OnboardingResponse,
-          VerificationCode
+          NotificationPreference,
+          Subscription,
+          Donation,
+          VerificationCode,
+          AiAvatar,
+          Meditation,
+          TourStep,
+          SpiritualGrowthTrack,
+          SpiritualCheckIn,
+          SpiritualAssessment,
+          SpiritualAssessmentQuestion,
+          SpiritualAssessmentResponse
         ],
         synchronize: true,
       }),
@@ -48,6 +81,17 @@ import { VerificationCode } from './auth/entities/verification-code.entity';
     BibleVersionsModule,
     UserPreferencesModule,
     OnboardingModule,
+    NotificationsModule,
+    SubscriptionsModule,
+    DonationsModule,
+    AiChatModule,
+    ImmersiveStoriesModule,
+    AiAvatarsModule,
+    DashboardModule,
+    MeditationModule,
+    TourModule,
+    SpiritualGrowthModule,
+    SpiritualAssessmentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

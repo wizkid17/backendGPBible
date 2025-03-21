@@ -43,6 +43,19 @@ export class AuthController {
     return req.user;
   }
 
+  @Get('features')
+  async getAccessibleFeatures(@Request() req) {
+    // Si hay un token JWT válido, req.user estará definido
+    const userId = req.user?.id || null;
+    return this.authService.getAccessibleFeatures(userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('premium-features')
+  async getPremiumFeatures(@Request() req) {
+    return this.authService.getAccessibleFeatures(req.user.id);
+  }
+
   @Post('reset-password')
   @HttpCode(HttpStatus.OK)
   async resetPassword(@Body() resetDto: { email: string }) {
