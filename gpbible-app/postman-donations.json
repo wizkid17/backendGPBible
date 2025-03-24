@@ -1,0 +1,246 @@
+{
+  "info": {
+    "name": "GPBible API - Donations",
+    "description": "Endpoints for donation management and charitable payments",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Total Donations",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/donations/total",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations",
+            "total"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Donations Count",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/donations/count",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations",
+            "count"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Recent Donations",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/donations/recent",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations",
+            "recent"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Donation By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/donations/{{donationId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations",
+            "{{donationId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get My Donations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/donations/my-donations",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations",
+            "my-donations"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Donation",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 25.00,\n  \"currency\": \"USD\",\n  \"paymentMethod\": \"card\",\n  \"isAnonymous\": false,\n  \"message\": \"Blessings for the ministry\",\n  \"donorName\": \"John Smith\",\n  \"donorEmail\": \"john@example.com\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/donations",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Process Donation Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/donations/{{donationId}}/process",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations",
+            "{{donationId}}",
+            "process"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Ministry Programs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/donations/programs",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations",
+            "programs"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Monthly Pledge",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"monthlyAmount\": 10.00,\n  \"currency\": \"USD\",\n  \"paymentMethod\": \"card\",\n  \"paymentMethodId\": \"pm_card_visa\",\n  \"programId\": \"{{programId}}\",\n  \"startDate\": \"2023-07-01\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/donations/pledge",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations",
+            "pledge"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Cancel Monthly Pledge",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/donations/pledge/{{pledgeId}}/cancel",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations",
+            "pledge",
+            "{{pledgeId}}",
+            "cancel"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get My Pledges",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/donations/my-pledges",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "donations",
+            "my-pledges"
+          ]
+        }
+      }
+    }
+  ]
+} 

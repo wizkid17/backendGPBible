@@ -1,0 +1,303 @@
+{
+  "info": {
+    "name": "GPBible API - Complete Collection",
+    "description": "Complete collection of endpoints for the GPBible API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Endpoints for authentication and user management",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-auth-endpoints.json to view authentication endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "description": "Endpoints for user profile management",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-users-endpoints.json to view user endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bible and Denominations",
+      "description": "Endpoints for Bible versions and denominations",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-bible-denominations.json to view endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Messaging",
+      "description": "Endpoints for private and group messaging",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-messaging-endpoints.json to view endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Preferences",
+      "description": "Endpoints for user preferences management",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-user-preferences.json to view preference endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "description": "Endpoints for managing notifications and notification preferences",
+      "item": [
+        {
+          "name": "Import Notifications Collection",
+          "request": {
+            "method": "GET",
+            "description": "Import postman-notifications.json to view notification endpoints",
+            "header": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Onboarding",
+      "description": "Endpoints for new user onboarding process",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-onboarding.json to view onboarding endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "App Ratings",
+      "description": "Endpoints for app ratings and feedback",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-app-ratings.json to view rating endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Subscriptions",
+      "description": "Endpoints for subscription and premium features management",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-subscriptions.json to view subscription endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "App Tour",
+      "description": "Endpoints for application introduction tour",
+      "item": [
+        {
+          "name": "Import Tour Collection",
+          "request": {
+            "method": "GET",
+            "description": "Import postman-tour.json to view app tour endpoints",
+            "header": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "description": "Endpoints for application dashboard",
+      "item": [
+        {
+          "name": "Import Dashboard Collection",
+          "request": {
+            "method": "GET",
+            "description": "Import postman-dashboard.json to view dashboard endpoints",
+            "header": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Meditation",
+      "description": "Endpoints for meditation resources management",
+      "item": [
+        {
+          "name": "Import Meditation Collection",
+          "request": {
+            "method": "GET",
+            "description": "Import postman-meditation.json to view meditation endpoints",
+            "header": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Immersive Content",
+      "description": "Endpoints for immersive Bible stories",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-immersive-content.json to view immersive content endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Spiritual Assessment",
+      "description": "Endpoints for spiritual assessments and growth tracking", 
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-spiritual-assessment.json to view spiritual assessment endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Donations",
+      "description": "Endpoints for donations and charitable payments management",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-donations.json to view donation endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Avatars",
+      "description": "Endpoints for AI avatars for spiritual assistance",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-ai-avatars.json to view AI avatar endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Chat",
+      "description": "Endpoints for interaction with AI virtual assistants",
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-ai-chat.json to view AI chat endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Spiritual Growth",
+      "description": "Endpoints for spiritual growth tracking and development", 
+      "item": [
+        {
+          "name": "Import Collection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            },
+            "description": "Import postman-spiritual-growth.json to view spiritual growth endpoints"
+          }
+        }
+      ]
+    }
+  ]
+}

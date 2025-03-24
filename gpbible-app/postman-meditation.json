@@ -1,0 +1,124 @@
+{
+  "info": {
+    "name": "GPBible API - Meditation",
+    "description": "Endpoints for meditation management and meditation resources",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Meditations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}",
+            "description": "Optional: Include token to get personalized meditation data"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/meditation",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "meditation"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Meditation By ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}",
+            "description": "Optional: Include token to get personalized meditation data"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/meditation/{{meditationId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "meditation",
+            "{{meditationId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Meditations By Tag",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}",
+            "description": "Optional: Include token to get personalized meditation data"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/meditation/tag/{{tagName}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "meditation",
+            "tag",
+            "{{tagName}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Premium Meditations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}",
+            "description": "Required: User must be authenticated and have premium subscription"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/meditation/premium",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "meditation",
+            "premium"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Quick Meditation",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}",
+            "description": "Optional: Include token to get personalized meditation data"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/meditation/quick",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "meditation",
+            "quick"
+          ]
+        }
+      }
+    }
+  ]
+} 

@@ -1,0 +1,177 @@
+{
+  "info": {
+    "name": "GPBible API - Tour",
+    "description": "Endpoints for the application introduction tour",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Tour Steps",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/tour",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "tour"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Tour Step By Number",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/tour/step/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "tour",
+            "step",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Should Show Tour",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/tour/should-show",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "tour",
+            "should-show"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User Tour Progress",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/tour/progress",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "tour",
+            "progress"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Complete Tour",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/tour/complete",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "tour",
+            "complete"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Skip Tour",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/tour/skip",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "tour",
+            "skip"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Feature Tips",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/tour/feature-tips",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "tour",
+            "feature-tips"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Dismiss Feature Tip",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/tour/feature-tips/{{tipId}}/dismiss",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "tour",
+            "feature-tips",
+            "{{tipId}}",
+            "dismiss"
+          ]
+        }
+      }
+    }
+  ]
+} 

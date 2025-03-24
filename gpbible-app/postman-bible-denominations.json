@@ -1,0 +1,267 @@
+{
+  "info": {
+    "name": "GPBible API - Bible and Denominations",
+    "description": "Endpoints for Bible versions and denominations for the GPBible API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Bible Versions",
+      "item": [
+        {
+          "name": "Get All Bible Versions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bible-versions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bible-versions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Bible Version By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bible-versions/{{versionId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bible-versions",
+                "{{versionId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Bible Version (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"King James Version\",\n  \"abbreviation\": \"KJV\",\n  \"language\": \"English\",\n  \"description\": \"Classic English version\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bible-versions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bible-versions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Bible Version (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"King James Version Updated\",\n  \"description\": \"Updated classic English version\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bible-versions/{{versionId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bible-versions",
+                "{{versionId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Bible Version (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bible-versions/{{versionId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bible-versions",
+                "{{versionId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Denominations",
+      "item": [
+        {
+          "name": "Get All Denominations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/denominations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "denominations"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Denomination By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/denominations/{{denominationId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "denominations",
+                "{{denominationId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Denomination (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Baptist\",\n  \"description\": \"Evangelical Christian denomination\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/denominations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "denominations"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Denomination (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Reformed Baptist\",\n  \"description\": \"Evangelical Christian denomination with reformed focus\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/denominations/{{denominationId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "denominations",
+                "{{denominationId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Denomination (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/denominations/{{denominationId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "denominations",
+                "{{denominationId}}"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+} 

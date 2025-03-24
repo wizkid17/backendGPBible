@@ -23,14 +23,12 @@ export class AuthService {
     @InjectRepository(VerificationCode)
     private verificationCodesRepository: Repository<VerificationCode>,
   ) {
-    // Configure email transporter (you should use environment variables for these values)
+    // Configure email transporter with app password
     this.transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
+      service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
+        pass: process.env.EMAIL_APP_PASSWORD,
       },
     });
   }

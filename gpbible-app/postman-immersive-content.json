@@ -1,0 +1,368 @@
+{
+  "info": {
+    "name": "GPBible API - Immersive Content",
+    "description": "Endpoints for immersive Bible stories and application tour",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Historias Inmersivas",
+      "item": [
+        {
+          "name": "Get All Stories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/immersive-stories?limit=10&offset=0",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "immersive-stories"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Featured Stories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/immersive-stories/featured",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "immersive-stories",
+                "featured"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Story By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/immersive-stories/{{storyId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "immersive-stories",
+                "{{storyId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Stories By Category",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/immersive-stories/category/old-testament",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "immersive-stories",
+                "category",
+                "old-testament"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Track Story Progress",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"storyId\": \"{{storyId}}\",\n  \"progressPercentage\": 75,\n  \"timeSpentSeconds\": 320\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/immersive-stories/progress",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "immersive-stories",
+                "progress"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mark Story Complete",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"storyId\": \"{{storyId}}\",\n  \"rating\": 5,\n  \"feedback\": \"Me encantó esta historia y las ilustraciones\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/immersive-stories/{{storyId}}/complete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "immersive-stories",
+                "{{storyId}}",
+                "complete"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User Story Progress",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/immersive-stories/my-progress",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "immersive-stories",
+                "my-progress"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Story to Favorites",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/immersive-stories/{{storyId}}/favorite",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "immersive-stories",
+                "{{storyId}}",
+                "favorite"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remove Story from Favorites",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/immersive-stories/{{storyId}}/favorite",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "immersive-stories",
+                "{{storyId}}",
+                "favorite"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tour de la App",
+      "item": [
+        {
+          "name": "Get All Tour Steps",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tour",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tour"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Tour Step",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tour/step/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tour",
+                "step",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Should Show Tour",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tour/should-show",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tour",
+                "should-show"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Tour Progress",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tour/progress",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tour",
+                "progress"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Complete Tour",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tour/complete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tour",
+                "complete"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Skip Tour",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tour/skip",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tour",
+                "skip"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+} 

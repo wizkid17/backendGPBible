@@ -1,0 +1,324 @@
+{
+  "info": {
+    "name": "GPBible API - Messaging Endpoints",
+    "description": "Endpoints for messaging and chat",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Send Message",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"content\": \"Hola, ¿cómo estás?\",\n  \"recipientId\": \"{{userId}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/messaging/messages",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "messages"
+          ]
+        },
+        "description": "For sending a message to a new recipient"
+      }
+    },
+    {
+      "name": "Send Message (existing conversation)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"content\": \"¡Hola de nuevo!\",\n  \"conversationId\": \"{{conversationId}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/messaging/messages",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "messages"
+          ]
+        },
+        "description": "For sending a message to an existing conversation"
+      }
+    },
+    {
+      "name": "Send Group Message",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"content\": \"¡Hola a todos!\",\n  \"groupId\": \"{{groupId}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/messaging/messages",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "messages"
+          ]
+        },
+        "description": "For sending a message to a group"
+      }
+    },
+    {
+      "name": "Get Conversation Messages",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/messaging/conversations/{{conversationId}}/messages",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "conversations",
+            "{{conversationId}}",
+            "messages"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Group Messages",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/messaging/groups/{{groupId}}/messages",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "groups",
+            "{{groupId}}",
+            "messages"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Mark Messages as Read",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/messaging/conversations/{{conversationId}}/read",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "conversations",
+            "{{conversationId}}",
+            "read"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Group",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Family group\",\n  \"description\": \"Group for family communication\",\n  \"avatarUrl\": \"https://example.com/avatar.jpg\",\n  \"memberIds\": [\"{{userId1}}\", \"{{userId2}}\"]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/messaging/groups",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "groups"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Add Group Members",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"groupId\": \"{{groupId}}\",\n  \"memberIds\": [\"{{userId1}}\", \"{{userId2}}\"]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/messaging/groups/members",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "groups",
+            "members"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User Groups",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/messaging/groups",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "groups"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Group Details",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/messaging/groups/{{groupId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "groups",
+            "{{groupId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User Conversations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/messaging/conversations",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "conversations"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Unread Message Counts",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/messaging/unread-counts",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "messaging",
+            "unread-counts"
+          ]
+        }
+      }
+    }
+  ]
+} 

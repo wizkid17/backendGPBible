@@ -1,0 +1,86 @@
+{
+  "info": {
+    "name": "GPBible API - App Ratings",
+    "description": "Endpoints for application ratings and feedback",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Submit Rating (Authenticated)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rating\": 5,\n  \"feedback\": \"I love this application!\",\n  \"dontShowAgain\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/app-ratings",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "app-ratings"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Submit Anonymous Rating",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rating\": 4,\n  \"feedback\": \"Very good app but could have more features\",\n  \"dontShowAgain\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/app-ratings/anonymous",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "app-ratings",
+            "anonymous"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Check User Rating Status",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/app-ratings/status",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "app-ratings",
+            "status"
+          ]
+        }
+      }
+    }
+  ]
+} 

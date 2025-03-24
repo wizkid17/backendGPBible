@@ -20,6 +20,8 @@ import { MeditationModule } from './meditation/meditation.module';
 import { TourModule } from './tour/tour.module';
 import { SpiritualGrowthModule } from './spiritual-growth/spiritual-growth.module';
 import { SpiritualAssessmentModule } from './spiritual-assessment/spiritual-assessment.module';
+import { AppRatingsModule } from './app-ratings/app-ratings.module';
+import { MessagingModule } from './messaging/messaging.module';
 import { User } from './users/entities/user.entity';
 import { Denomination } from './denominations/entities/denomination.entity';
 import { BibleVersion } from './bible-versions/entities/bible-version.entity';
@@ -37,6 +39,11 @@ import { SpiritualCheckIn } from './spiritual-growth/entities/spiritual-check-in
 import { SpiritualAssessment } from './spiritual-assessment/entities/spiritual-assessment.entity';
 import { SpiritualAssessmentQuestion } from './spiritual-assessment/entities/spiritual-assessment-question.entity';
 import { SpiritualAssessmentResponse } from './spiritual-assessment/entities/spiritual-assessment-response.entity';
+import { AppRating } from './app-ratings/entities/app-rating.entity';
+import { ChatMessage } from './messaging/entities/chat-message.entity';
+import { ChatGroup } from './messaging/entities/chat-group.entity';
+import { ChatGroupMember } from './messaging/entities/chat-group-member.entity';
+import { ChatConversation } from './messaging/entities/chat-conversation.entity';
 
 @Module({
   imports: [
@@ -69,7 +76,12 @@ import { SpiritualAssessmentResponse } from './spiritual-assessment/entities/spi
           SpiritualCheckIn,
           SpiritualAssessment,
           SpiritualAssessmentQuestion,
-          SpiritualAssessmentResponse
+          SpiritualAssessmentResponse,
+          AppRating,
+          ChatMessage,
+          ChatGroup,
+          ChatGroupMember,
+          ChatConversation
         ],
         synchronize: true,
       }),
@@ -92,6 +104,8 @@ import { SpiritualAssessmentResponse } from './spiritual-assessment/entities/spi
     TourModule,
     SpiritualGrowthModule,
     SpiritualAssessmentModule,
+    AppRatingsModule,
+    MessagingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

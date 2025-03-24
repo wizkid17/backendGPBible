@@ -1,0 +1,367 @@
+{
+  "id": "fe724341-c82d-4d37-851d-9fe58dcc0c97",
+  "name": "GPBible API Environment",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "admin_token",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "userId1",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "userId2",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "versionId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "bookId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "chapterNumber",
+      "value": "1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "verseNumber",
+      "value": "1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "startVerse",
+      "value": "1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "endVerse",
+      "value": "10",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "denominationId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "bookmarkId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "favoriteId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "noteId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "ratingId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "reportId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "startDate",
+      "value": "2023-01-01",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "endDate",
+      "value": "2023-12-31",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "questionId1",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "questionId2",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "conversationId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "groupId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "requestId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "postId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "commentId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "eventId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "planId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "achievementId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "storyId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "assessmentId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "resultId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "resultId1",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "resultId2",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "trackId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "activityId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "donationId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "pledgeId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "programId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "avatarId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "categoryId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "featureId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "feedbackId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "calendarItemId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "reminderId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "templateId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "customPlanId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "dayNumber",
+      "value": "1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "sharedPlanId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "stepId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "tipId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "subscriptionId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "invoiceId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "sessionId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "messageId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "personalityId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "challengeId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "goalId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "milestoneId",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+} 
