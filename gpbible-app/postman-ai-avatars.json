@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "GPBible API - AI Avatars",
+    "description": "Endpoints for AI avatar management for spiritual assistance",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Avatars",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/ai-avatars",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-avatars"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Avatar By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/ai-avatars/{{avatarId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-avatars",
+            "{{avatarId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User's Selected Avatar",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/ai-avatars/user/selected",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-avatars",
+            "user",
+            "selected"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Select Avatar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/ai-avatars/select/{{avatarId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-avatars",
+            "select",
+            "{{avatarId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Premium Avatars",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/ai-avatars/premium",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-avatars",
+            "premium"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Avatar Recommendation",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/ai-avatars/recommendation",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-avatars",
+            "recommendation"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Avatar Categories",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/ai-avatars/categories",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-avatars",
+            "categories"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Avatars By Category",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/ai-avatars/category/{{categoryId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-avatars",
+            "category",
+            "{{categoryId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Interact With Avatar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"avatarId\": \"{{avatarId}}\",\n  \"message\": \"Háblame sobre Juan 3:16\",\n  \"context\": \"STUDY\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/ai-avatars/interact",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-avatars",
+            "interact"
+          ]
+        }
+      }
+    }
+  ]
+} 

@@ -1,0 +1,201 @@
+{
+  "info": {
+    "name": "GPBible API - Onboarding",
+    "description": "Endpoints for the new user onboarding process",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Onboarding Response",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"appMotivations\": [\"bible_study\", \"spiritual_growth\"],\n  \"spiritualJourney\": \"growing_in_faith\",\n  \"focusAreas\": [\"prayer\", \"bible_study\"],\n  \"spiritualPractices\": [\"meditation\", \"service\"],\n  \"dailyDevotionTime\": \"morning\",\n  \"prayerFrequency\": \"daily\",\n  \"dedicationTime\": \"thirty_minutes\",\n  \"preferredStudyMethods\": [\"verse_by_verse\", \"topical\"],\n  \"wantsProgressTracking\": true,\n  \"wantsPersonalizedRecommendations\": true,\n  \"selectedAvatarId\": \"avatar123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/onboarding",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onboarding"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User's Onboarding Data",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/onboarding",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onboarding"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update Onboarding Data",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"focusAreas\": [\"prayer\", \"bible_study\", \"worship\"],\n  \"dailyDevotionTime\": \"evening\",\n  \"wantsProgressTracking\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/onboarding",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onboarding"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Check Onboarding Status",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/onboarding/status",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onboarding",
+            "status"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Complete Onboarding",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/onboarding/complete",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onboarding",
+            "complete"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Tour Status",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/onboarding/tour/status",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onboarding",
+            "tour",
+            "status"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Skip Tour",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/onboarding/tour/skip",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onboarding",
+            "tour",
+            "skip"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Complete Tour",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/onboarding/tour/complete",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onboarding",
+            "tour",
+            "complete"
+          ]
+        }
+      }
+    }
+  ]
+} 

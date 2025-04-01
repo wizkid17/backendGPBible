@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "GPBible API - Spiritual Growth",
+    "description": "Endpoints for spiritual growth tracking and development",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Tracks",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/spiritual-growth/tracks",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "spiritual-growth",
+            "tracks"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Track By ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/spiritual-growth/tracks/{{trackId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "spiritual-growth",
+            "tracks",
+            "{{trackId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Track",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Crecimiento en Oración\",\n  \"description\": \"Desarrollo de un hábito de oración diaria\",\n  \"category\": \"prayer\",\n  \"steps\": 30\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/spiritual-growth/tracks",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "spiritual-growth",
+            "tracks"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Check-In",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"trackId\": \"{{trackId}}\",\n  \"notes\": \"Hoy pude mantener mi tiempo de oración por 15 minutos\",\n  \"rating\": 4,\n  \"date\": \"2023-05-10\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/spiritual-growth/check-in",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "spiritual-growth",
+            "check-in"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get All Check-Ins",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/spiritual-growth/check-ins",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "spiritual-growth",
+            "check-ins"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Check-Ins For Track",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/spiritual-growth/check-ins/track/{{trackId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "spiritual-growth",
+            "check-ins",
+            "track",
+            "{{trackId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Recent Check-Ins",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/spiritual-growth/recent-check-ins",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "spiritual-growth",
+            "recent-check-ins"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Growth Summary",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/spiritual-growth/summary",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "spiritual-growth",
+            "summary"
+          ]
+        }
+      }
+    }
+  ]
+} 

@@ -1,0 +1,116 @@
+{
+  "info": {
+    "name": "GPBible API - AI Chat",
+    "description": "Endpoints for interaction with AI virtual assistants",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Send Message",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"¿Cuál es el significado del capítulo 3 versículo 16?\",\n  \"conversationId\": \"{{conversationId}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/ai-chat/message",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-chat",
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Save Conversation",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"¿Puedes explicarme el significado del Salmo 23?\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"El Salmo 23 es uno de los pasajes más conocidos y amados de la Biblia...\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/ai-chat/conversations/{{conversationId}}/save",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-chat",
+            "conversations",
+            "{{conversationId}}",
+            "save"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Conversation",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/ai-chat/conversations/{{conversationId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-chat",
+            "conversations",
+            "{{conversationId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Recent Conversations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/ai-chat/conversations",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ai-chat",
+            "conversations"
+          ]
+        }
+      }
+    }
+  ]
+} 

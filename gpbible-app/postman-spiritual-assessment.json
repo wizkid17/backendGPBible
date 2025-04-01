@@ -1,0 +1,365 @@
+{
+  "info": {
+    "name": "GPBible API - Spiritual Assessment",
+    "description": "Endpoints for spiritual assessments and spiritual growth tracking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Evaluaciones",
+      "item": [
+        {
+          "name": "Get All Assessments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-assessment",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-assessment"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Assessment By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-assessment/{{assessmentId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-assessment",
+                "{{assessmentId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Assessment Questions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-assessment/{{assessmentId}}/questions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-assessment",
+                "{{assessmentId}}",
+                "questions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Submit Assessment Answers",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assessmentId\": \"{{assessmentId}}\",\n  \"answers\": [\n    {\n      \"questionId\": \"{{questionId1}}\",\n      \"response\": \"OFTEN\"\n    },\n    {\n      \"questionId\": \"{{questionId2}}\",\n      \"response\": \"SOMETIMES\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/spiritual-assessment/submit",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-assessment",
+                "submit"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User Assessment Results",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-assessment/my-results",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-assessment",
+                "my-results"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Assessment Result By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-assessment/results/{{resultId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-assessment",
+                "results",
+                "{{resultId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Compare Assessment Results",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-assessment/compare?firstResultId={{resultId1}}&secondResultId={{resultId2}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-assessment",
+                "compare"
+              ],
+              "query": [
+                {
+                  "key": "firstResultId",
+                  "value": "{{resultId1}}"
+                },
+                {
+                  "key": "secondResultId",
+                  "value": "{{resultId2}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Crecimiento Espiritual",
+      "item": [
+        {
+          "name": "Get Growth Recommendations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-growth/recommendations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-growth",
+                "recommendations"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Growth Tracks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-growth/tracks",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-growth",
+                "tracks"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Growth Track By ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-growth/tracks/{{trackId}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-growth",
+                "tracks",
+                "{{trackId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Start Growth Track",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"trackId\": \"{{trackId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/spiritual-growth/start-track",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-growth",
+                "start-track"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Record Growth Activity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"trackId\": \"{{trackId}}\",\n  \"activityId\": \"{{activityId}}\",\n  \"notes\": \"Aprendí mucho de esta actividad\",\n  \"completionDate\": \"2023-07-15T14:30:00Z\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/spiritual-growth/record-activity",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-growth",
+                "record-activity"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User Growth Progress",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-growth/my-progress",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-growth",
+                "my-progress"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Growth Track Progress",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/spiritual-growth/tracks/{{trackId}}/progress",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "spiritual-growth",
+                "tracks",
+                "{{trackId}}",
+                "progress"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+} 

@@ -1,0 +1,156 @@
+{
+  "info": {
+    "name": "GPBible API - User Preferences",
+    "description": "Endpoints for user preferences management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create User Preference",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"user\": {\"id\": \"{{userId}}\"},\n  \"denomination\": {\"id\": \"{{denominationId}}\"},\n  \"bibleVersion\": {\"id\": \"{{versionId}}\"},\n  \"selectedAvatarId\": \"avatar123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/user-preferences",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user-preferences"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get All User Preferences",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user-preferences",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user-preferences"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User Preference By ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user-preferences/{{preferenceId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user-preferences",
+            "{{preferenceId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User Preference By User ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user-preferences/user/{{userId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user-preferences",
+            "user",
+            "{{userId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update User Preference",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"bibleVersion\": {\"id\": \"{{versionId}}\"},\n  \"denomination\": {\"id\": \"{{denominationId}}\"},\n  \"selectedAvatarId\": \"avatar456\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/user-preferences/{{preferenceId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user-preferences",
+            "{{preferenceId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Delete User Preference",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user-preferences/{{preferenceId}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user-preferences",
+            "{{preferenceId}}"
+          ]
+        }
+      }
+    }
+  ]
+} 

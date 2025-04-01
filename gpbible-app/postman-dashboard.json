@@ -1,0 +1,189 @@
+{
+  "info": {
+    "name": "GPBible API - Dashboard",
+    "description": "Endpoints for the application dashboard",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Dashboard Data",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/dashboard",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dashboard"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Spiritual Assessment Info",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/dashboard/spiritual-assessment",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dashboard",
+            "spiritual-assessment"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Spiritual Assessment Results",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/dashboard/spiritual-assessment-results",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dashboard",
+            "spiritual-assessment-results"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Home Sections",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/dashboard/home-sections",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dashboard",
+            "home-sections"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Daily Verse Details",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/dashboard/daily-verse-details",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dashboard",
+            "daily-verse-details"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Navigation Links",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/dashboard/navigation-links",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dashboard",
+            "navigation-links"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Content Reactions",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/dashboard/content/{{contentId}}/reactions",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dashboard",
+            "content",
+            "{{contentId}}",
+            "reactions"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Share Content",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"contentId\": \"verse-2023-04-01\",\n  \"platform\": \"facebook\",\n  \"message\": \"Check out this amazing verse!\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/dashboard/share",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "dashboard",
+            "share"
+          ]
+        }
+      }
+    }
+  ]
+} 

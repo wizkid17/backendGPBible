@@ -1,0 +1,250 @@
+{
+  "info": {
+    "name": "GPBible API - Subscriptions",
+    "description": "Endpoints for subscription management and premium features",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get My Subscription",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/subscriptions",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "subscriptions"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Check Premium Status",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/subscriptions/status",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "subscriptions",
+            "status"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Subscription",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"premium\",\n  \"paymentMethod\": \"credit_card\",\n  \"startDate\": \"2023-04-01\",\n  \"endDate\": \"2024-04-01\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/subscriptions",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "subscriptions"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Upgrade To Premium",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paymentId\": \"pay_12345\",\n  \"endDate\": \"2024-04-01\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/subscriptions/upgrade",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "subscriptions",
+            "upgrade"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Cancel Subscription",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/subscriptions/cancel",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "subscriptions",
+            "cancel"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update Subscription",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"active\",\n  \"endDate\": \"2024-05-01\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/subscriptions",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "subscriptions"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Premium Features",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/subscriptions/premium-features",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "subscriptions",
+            "premium-features"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Check AI Chat Access",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/subscriptions/ai-chat-access",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "subscriptions",
+            "ai-chat-access"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Check Immersive Stories Access",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/subscriptions/immersive-stories-access",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "subscriptions",
+            "immersive-stories-access"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Premium Plan Info",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/subscriptions/premium-plan-info",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "subscriptions",
+            "premium-plan-info"
+          ]
+        }
+      }
+    }
+  ]
+} 
