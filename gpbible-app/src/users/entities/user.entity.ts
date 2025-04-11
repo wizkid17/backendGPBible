@@ -1,38 +1,43 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { UserPreference } from '../../user-preferences/entities/user-preference.entity';
+import { UserSettings } from '../../user-preferences/entities/user-settings.entity';
+import { AiChatMessage } from '../../ai-chat/entities/ai-chat-message.entity';
 
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 255, unique: true })
+  @Column({ unique: true })
   email: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column()
   @Exclude()
   password: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column({ nullable: true })
   firstName?: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
+  @Column({ nullable: true })
   lastName?: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ nullable: true })
   picture?: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ nullable: true })
   googleId?: string;
+
+  @Column({ default: false })
+  isEmailVerified: boolean;
 
   @Column({ type: 'date', nullable: true })
   birthDate?: Date;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ nullable: true })
   resetPasswordToken?: string;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ nullable: true })
   resetPasswordExpires?: Date;
 
   @Column({ type: 'boolean', nullable: true, default: false })
@@ -44,9 +49,15 @@ export class User {
   @OneToMany(() => UserPreference, preference => preference.user)
   preferences: UserPreference[];
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @OneToMany(() => UserSettings, settings => settings.user)
+  settings: UserSettings[];
+
+  @OneToMany(() => AiChatMessage, message => message.user)
+  chatMessages: AiChatMessage[];
+
+  @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn()
   updatedAt: Date;
 } 

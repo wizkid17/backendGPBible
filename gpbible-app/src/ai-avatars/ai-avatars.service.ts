@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AiAvatar } from './entities/ai-avatar.entity';
@@ -9,9 +9,9 @@ import { SubscriptionsService } from '../subscriptions/subscriptions.service';
 export class AiAvatarsService {
   constructor(
     @InjectRepository(AiAvatar)
-    private aiAvatarRepository: Repository<AiAvatar>,
-    private userPreferencesService: UserPreferencesService,
-    private subscriptionsService: SubscriptionsService,
+    private readonly aiAvatarRepository: Repository<AiAvatar>,
+    private readonly userPreferencesService: UserPreferencesService,
+    private readonly subscriptionsService: SubscriptionsService,
   ) {}
 
   async findAll(includePremium: boolean = false): Promise<AiAvatar[]> {
@@ -26,15 +26,43 @@ export class AiAvatarsService {
   }
 
   async findOne(id: string): Promise<AiAvatar> {
-    return this.aiAvatarRepository.findOne({ where: { id } });
+    const avatar = await this.aiAvatarRepository.findOne({ where: { id } });
+    if (!avatar) {
+      throw new NotFoundException(`Avatar with ID ${id} not found`);
+    }
+    return avatar;
+  }
+
+  async selectAvatar(userId: string, avatarId: string): Promise<void> {
+    const avatar = await this.findOne(avatarId);
+    if (!avatar) {
+      throw new NotFoundException(`Avatar with ID ${avatarId} not found`);
+    }
+
+    // Actualizar las preferencias del usuario con el avatar seleccionado
+    await this.userPreferencesService.updateSettings(userId, {
+      additionalPreferences: { selectedAvatarId: avatarId }
+    });
+  }
+
+  async getSelectedAvatar(userId: string): Promise<AiAvatar | null> {
+    const settings = await this.userPreferencesService.getSettings(userId);
+    const selectedAvatarId = settings?.additionalPreferences?.selectedAvatarId;
+
+    if (selectedAvatarId) {
+      return this.findOne(selectedAvatarId);
+    }
+
+    return null;
   }
 
   async getUserAvatar(userId: string): Promise<AiAvatar> {
     // Obtener las preferencias del usuario para ver qué avatar ha seleccionado
-    const userPreferences = await this.userPreferencesService.findByUserId(userId);
+    const settings = await this.userPreferencesService.getSettings(userId);
+    const selectedAvatarId = settings?.additionalPreferences?.selectedAvatarId;
     
-    if (userPreferences && userPreferences.selectedAvatarId) {
-      return this.findOne(userPreferences.selectedAvatarId);
+    if (selectedAvatarId) {
+      return this.findOne(selectedAvatarId);
     }
     
     // Si el usuario no ha seleccionado un avatar, devolver el predeterminado
@@ -43,22 +71,15 @@ export class AiAvatarsService {
       take: 1
     });
     
-    return defaultAvatars[0] || null;
+    if (!defaultAvatars.length) {
+      throw new NotFoundException('No default avatar found');
+    }
+    
+    return defaultAvatars[0];
   }
 
   async getUserIsPremium(userId: string): Promise<boolean> {
     return this.subscriptionsService.isUserPremium(userId);
-  }
-
-  async setUserAvatar(userId: string, avatarId: string): Promise<void> {
-    // Verificar que el avatar existe
-    const avatar = await this.findOne(avatarId);
-    if (!avatar) {
-      throw new Error('Avatar no encontrado');
-    }
-    
-    // Actualizar las preferencias del usuario con el avatar seleccionado
-    await this.userPreferencesService.update(userId, { selectedAvatarId: avatarId });
   }
 
   // Método para inicializar avatares por defecto si no existen

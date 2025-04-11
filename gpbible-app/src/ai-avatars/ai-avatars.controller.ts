@@ -1,47 +1,54 @@
-import { Controller, Get, Post, Param, UseGuards, Request, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, UseGuards, Request, Query, ParseBoolPipe } from '@nestjs/common';
 import { AiAvatarsService } from './ai-avatars.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { PremiumGuard } from '../subscriptions/guards/premium.guard';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('ai-avatars')
 @Controller('ai-avatars')
 export class AiAvatarsController {
-  constructor(private readonly aiAvatarsService: AiAvatarsService) {
-    // Inicializar avatares por defecto al iniciar la aplicación
-    this.aiAvatarsService.initializeDefaultAvatars();
-  }
+  constructor(private readonly aiAvatarsService: AiAvatarsService) {}
 
-  // Obtener todos los avatares disponibles
   @Get()
-  async findAll(@Request() req) {
-    // Determinar si el usuario es premium para mostrar avatares premium
-    const isPremium = req.user ? await this.aiAvatarsService.getUserIsPremium(req.user.id) : false;
-    return this.aiAvatarsService.findAll(isPremium);
+  @ApiOperation({ summary: 'Get all available avatars' })
+  async findAll(@Query('includePremium', ParseBoolPipe) includePremium: boolean = false) {
+    return this.aiAvatarsService.findAll(includePremium);
   }
 
-  // Obtener un avatar específico por ID
   @Get(':id')
+  @ApiOperation({ summary: 'Get avatar by ID' })
   findOne(@Param('id') id: string) {
     return this.aiAvatarsService.findOne(id);
   }
 
-  // Obtener el avatar seleccionado del usuario autenticado
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @Post(':id/select')
+  @ApiOperation({ summary: 'Select an avatar for the current user' })
+  async selectAvatar(@Request() req, @Param('id') avatarId: string) {
+    return this.aiAvatarsService.selectAvatar(req.user.id, avatarId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Get('user/selected')
-  getUserAvatar(@Request() req) {
+  @ApiOperation({ summary: 'Get the currently selected avatar for the user' })
+  async getSelectedAvatar(@Request() req) {
+    return this.aiAvatarsService.getSelectedAvatar(req.user.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @Get('user/current')
+  @ApiOperation({ summary: 'Get the current avatar for the user' })
+  async getUserAvatar(@Request() req) {
     return this.aiAvatarsService.getUserAvatar(req.user.id);
   }
 
-  // Establecer el avatar seleccionado para el usuario autenticado
   @UseGuards(JwtAuthGuard)
-  @Post('select/:id')
-  setUserAvatar(@Request() req, @Param('id') avatarId: string) {
-    return this.aiAvatarsService.setUserAvatar(req.user.id, avatarId);
-  }
-
-  // Obtener todos los avatares premium (protegido con PremiumGuard)
-  @UseGuards(JwtAuthGuard, PremiumGuard)
-  @Get('premium')
-  getPremiumAvatars() {
-    return this.aiAvatarsService.findAll(true);
+  @ApiBearerAuth()
+  @Get('user/premium-status')
+  @ApiOperation({ summary: 'Check if the user has premium access' })
+  async getUserIsPremium(@Request() req) {
+    return this.aiAvatarsService.getUserIsPremium(req.user.id);
   }
 } 

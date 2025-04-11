@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,22 +10,21 @@ async function bootstrap() {
   app.enableCors();
   
   // Global pipes for validation
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
-    transform: true,
-    forbidNonWhitelisted: true,
-  }));
+  app.useGlobalPipes(new ValidationPipe());
 
   // Swagger configuration
   const config = new DocumentBuilder()
     .setTitle('GPBible API')
-    .setDescription('The GPBible REST API documentation')
+    .setDescription('API documentation for GPBible application')
     .setVersion('1.0')
+    .addTag('Authentication', 'Authentication endpoints')
+    .addTag('Google Authentication', 'Google OAuth endpoints')
+    .addTag('Users', 'User management endpoints')
     .addBearerAuth()
     .build();
   
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, document);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
   

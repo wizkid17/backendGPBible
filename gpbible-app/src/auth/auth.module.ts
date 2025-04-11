@@ -12,12 +12,13 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { VerificationCode } from './entities/verification-code.entity';
 import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
 import { EmailModule } from '../email/email.module';
+import { GoogleAuthController } from './controllers/google-auth.controller';
 
 @Module({
   imports: [
     SubscriptionsModule,
     UsersModule,
-    PassportModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     TypeOrmModule.forFeature([VerificationCode]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -28,9 +29,10 @@ import { EmailModule } from '../email/email.module';
       inject: [ConfigService],
     }),
     EmailModule,
+    ConfigModule,
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy, GoogleStrategy],
-  controllers: [AuthController],
+  controllers: [AuthController, GoogleAuthController],
   exports: [AuthService],
 })
 export class AuthModule {} 

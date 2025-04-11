@@ -4,12 +4,21 @@ import { Repository } from 'typeorm';
 import { SubscriptionsService } from '../subscriptions/subscriptions.service';
 import { OpenAiService } from './services/openai.service';
 import { ChatConversation } from './entities/chat-conversation.entity';
-import { ChatMessage } from './entities/chat-message.entity';
-import { ChatMessageRole } from './entities/chat-message.entity';
+import { ChatMessage, ChatMessageRole } from './entities/chat-message.entity';
+import { AiChatMessage } from './entities/ai-chat-message.entity';
+import { MessageType } from './enums/message-type.enum';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { BibleVersionsService } from '../bible-versions/bible-versions.service';
 
 // Interface for the message in the API
 export interface ChatMessageDto {
   role: 'user' | 'assistant' | 'system';
+  content: string;
+}
+
+// Interface for chat message format
+interface ChatMessageFormat {
+  role: ChatMessageRole;
   content: string;
 }
 
@@ -27,7 +36,10 @@ export class AiChatService {
     @InjectRepository(ChatConversation)
     private chatConversationRepository: Repository<ChatConversation>,
     @InjectRepository(ChatMessage)
-    private chatMessageRepository: Repository<ChatMessage>
+    private chatMessageRepository: Repository<ChatMessage>,
+    @InjectRepository(AiChatMessage)
+    private readonly aiChatMessageRepository: Repository<AiChatMessage>,
+    private readonly bibleVersionsService: BibleVersionsService,
   ) {}
 
   // Method to verify if a user has access to the AI chat
@@ -246,5 +258,127 @@ export class AiChatService {
     // Update title
     conversation.title = title;
     await this.chatConversationRepository.save(conversation);
+  }
+
+  async createMessage(userId: string, content: string): Promise<AiChatMessage> {
+    const message = this.aiChatMessageRepository.create({
+      userId,
+      content,
+      type: MessageType.TEXT,
+      role: ChatMessageRole.USER
+    });
+
+    await this.aiChatMessageRepository.save(message);
+
+    // Generar respuesta del AI
+    const aiResponse = await this.generateAiResponse(userId, content);
+    return aiResponse;
+  }
+
+  async generateAiResponse(userId: string, message: string): Promise<AiChatMessage> {
+    // Verificar acceso
+    await this.verifyAccess(userId);
+
+    // Obtener mensajes recientes
+    const recentMessages = await this.getRecentMessages(userId);
+
+    // Preparar el prompt
+    const prompt = this.preparePrompt(recentMessages);
+
+    // Obtener respuesta de OpenAI
+    const aiResponse = await this.openAiService.generateChatCompletion(prompt);
+
+    // Determinar el tipo de mensaje basado en el contenido
+    const messageType = this.determineMessageType(aiResponse);
+
+    // Crear el mensaje de respuesta
+    const responseMessage = this.aiChatMessageRepository.create({
+      userId,
+      content: aiResponse,
+      type: messageType,
+      role: ChatMessageRole.ASSISTANT
+    });
+
+    // Guardar el mensaje
+    return await this.aiChatMessageRepository.save(responseMessage);
+  }
+
+  async getRecentMessages(userId: string, limit: number = 5): Promise<AiChatMessage[]> {
+    return this.aiChatMessageRepository.find({
+      where: { userId },
+      order: { createdAt: 'DESC' },
+      take: limit
+    });
+  }
+
+  private preparePrompt(recentMessages: AiChatMessage[]): ChatMessage[] {
+    // Convertir los mensajes al formato esperado por OpenAI
+    return recentMessages.map(msg => ({
+      id: msg.id,
+      conversationId: null,
+      conversation: null,
+      role: msg.role,
+      content: msg.content,
+      createdAt: msg.createdAt
+    }));
+  }
+
+  private determineMessageType(content: string): MessageType {
+    const lowerContent = content.toLowerCase();
+    
+    if (content.match(/\b\d+:\d+\b/) || lowerContent.includes('verse') || lowerContent.includes('chapter')) {
+      return MessageType.VERSE;
+    }
+    
+    if (lowerContent.includes('pray') || lowerContent.includes('prayer')) {
+      return MessageType.PRAYER;
+    }
+    
+    if (lowerContent.includes('recommend') || lowerContent.includes('suggestion')) {
+      return MessageType.RECOMMENDATION;
+    }
+    
+    if (lowerContent.includes('resource') || lowerContent.includes('link')) {
+      return MessageType.RESOURCE;
+    }
+    
+    if (lowerContent.includes('suggest') || lowerContent.includes('try')) {
+      return MessageType.SUGGESTION;
+    }
+    
+    return MessageType.TEXT;
+  }
+
+  async getUserChatHistory(userId: string, limit: number = 50): Promise<AiChatMessage[]> {
+    return this.aiChatMessageRepository.find({
+      where: { userId },
+      order: { createdAt: 'DESC' },
+      take: limit
+    });
+  }
+
+  async shareVerse(userId: string, verseReference: string): Promise<AiChatMessage> {
+    const verse = await this.bibleVersionsService.getVerse(verseReference);
+    
+    const message = this.aiChatMessageRepository.create({
+      userId,
+      content: verse[0].text,
+      type: MessageType.VERSE,
+      role: ChatMessageRole.ASSISTANT,
+      verseReference
+    });
+
+    return this.aiChatMessageRepository.save(message);
+  }
+
+  async writePrayer(userId: string, prayer: string): Promise<AiChatMessage> {
+    const message = this.aiChatMessageRepository.create({
+      userId,
+      content: prayer,
+      type: MessageType.PRAYER,
+      role: ChatMessageRole.USER
+    });
+
+    return this.aiChatMessageRepository.save(message);
   }
 } 

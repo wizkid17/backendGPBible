@@ -22,10 +22,12 @@ import { SpiritualGrowthModule } from './spiritual-growth/spiritual-growth.modul
 import { SpiritualAssessmentModule } from './spiritual-assessment/spiritual-assessment.module';
 import { AppRatingsModule } from './app-ratings/app-ratings.module';
 import { MessagingModule } from './messaging/messaging.module';
+import { FAQsModule } from './faqs/faqs.module';
 import { User } from './users/entities/user.entity';
 import { Denomination } from './denominations/entities/denomination.entity';
 import { BibleVersion } from './bible-versions/entities/bible-version.entity';
 import { UserPreference } from './user-preferences/entities/user-preference.entity';
+import { UserSettings } from './user-preferences/entities/user-settings.entity';
 import { OnboardingResponse } from './onboarding/entities/onboarding-response.entity';
 import { NotificationPreference } from './notifications/entities/notification-preference.entity';
 import { Subscription } from './subscriptions/entities/subscription.entity';
@@ -46,7 +48,13 @@ import { ChatMessage } from './messaging/entities/chat-message.entity';
 import { ChatGroup } from './messaging/entities/chat-group.entity';
 import { ChatGroupMember } from './messaging/entities/chat-group-member.entity';
 import { ChatConversation } from './messaging/entities/chat-conversation.entity';
+import { AiChatMessage } from './ai-chat/entities/ai-chat-message.entity';
+import { FAQ } from './faqs/entities/faq.entity';
 import { SpiritualProgressModule } from './spiritual-progress/spiritual-progress.module';
+import { FeedbackModule } from './feedback/feedback.module';
+import { AboutModule } from './about/about.module';
+import { Feedback } from './feedback/entities/feedback.entity';
+import { About } from './about/entities/about.entity';
 
 @Module({
   imports: [
@@ -67,6 +75,7 @@ import { SpiritualProgressModule } from './spiritual-progress/spiritual-progress
           Denomination,
           BibleVersion,
           UserPreference,
+          UserSettings,
           OnboardingResponse,
           NotificationPreference,
           Subscription,
@@ -89,7 +98,11 @@ import { SpiritualProgressModule } from './spiritual-progress/spiritual-progress
           ChatMessage,
           ChatGroup,
           ChatGroupMember,
-          ChatConversation
+          ChatConversation,
+          AiChatMessage,
+          FAQ,
+          Feedback,
+          About
         ],
         synchronize: true,
       }),
@@ -114,7 +127,10 @@ import { SpiritualProgressModule } from './spiritual-progress/spiritual-progress
     SpiritualAssessmentModule,
     AppRatingsModule,
     MessagingModule,
-    SpiritualProgressModule,
+    FAQsModule,
+    FeedbackModule,
+    AboutModule,
+    SpiritualProgressModule
   ],
   controllers: [AppController],
   providers: [AppService],

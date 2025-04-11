@@ -1,38 +1,51 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Put, UseGuards, Request, Body, Param } from '@nestjs/common';
 import { UserPreferencesService } from './user-preferences.service';
-import { UserPreference } from './entities/user-preference.entity';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UpdateUserSettingsDto } from './dto/update-user-settings.dto';
+import { TextSize } from './enums/text-size.enum';
+import { Language } from './enums/language.enum';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('user-preferences')
 @Controller('user-preferences')
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 export class UserPreferencesController {
   constructor(private readonly userPreferencesService: UserPreferencesService) {}
 
-  @Post()
-  create(@Body() userPreference: Partial<UserPreference>) {
-    return this.userPreferencesService.create(userPreference);
-  }
-
   @Get()
-  findAll() {
-    return this.userPreferencesService.findAll();
+  @ApiOperation({ summary: 'Get user settings' })
+  async getSettings(@Request() req) {
+    return this.userPreferencesService.getSettings(req.user.id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userPreferencesService.findOne(id);
+  @Put()
+  @ApiOperation({ summary: 'Update user settings' })
+  async updateSettings(@Request() req, @Body() updateDto: UpdateUserSettingsDto) {
+    return this.userPreferencesService.updateSettings(req.user.id, updateDto);
   }
 
-  @Get('user/:userId')
-  findByUserId(@Param('userId') userId: string) {
-    return this.userPreferencesService.findByUserId(userId);
+  @Put('text-size/:size')
+  @ApiOperation({ summary: 'Update text size' })
+  async updateTextSize(@Request() req, @Param('size') textSize: TextSize) {
+    return this.userPreferencesService.updateTextSize(req.user.id, textSize);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() userPreference: Partial<UserPreference>) {
-    return this.userPreferencesService.update(id, userPreference);
+  @Put('language/:lang')
+  @ApiOperation({ summary: 'Update language' })
+  async updateLanguage(@Request() req, @Param('lang') language: Language) {
+    return this.userPreferencesService.updateLanguage(req.user.id, language);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userPreferencesService.remove(id);
+  @Put('notifications')
+  @ApiOperation({ summary: 'Update notifications settings' })
+  async updateNotifications(@Request() req, @Body('enabled') enabled: boolean) {
+    return this.userPreferencesService.updateNotifications(req.user.id, enabled);
+  }
+
+  @Put('reset')
+  @ApiOperation({ summary: 'Reset user settings to default' })
+  async resetSettings(@Request() req) {
+    return this.userPreferencesService.resetSettings(req.user.id);
   }
 } 

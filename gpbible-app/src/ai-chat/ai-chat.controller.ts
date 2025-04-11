@@ -1,7 +1,9 @@
-import { Controller, Post, Get, Body, Param, Request, UseGuards, Delete, Put } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, Request, UseGuards, Delete, Put, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { AiChatService, ChatMessageDto, ChatResponse } from './ai-chat.service';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
 
 class SendMessageDto {
   message: string;
@@ -99,5 +101,32 @@ export class AiChatController {
       body.title
     );
     return { success: true };
+  }
+
+  @Post('message')
+  @ApiOperation({ summary: 'Create a new chat message' })
+  async createMessage(@Request() req, @Body() createMessageDto: CreateMessageDto) {
+    return this.aiChatService.createMessage(req.user.id, createMessageDto.content);
+  }
+
+  @Get('history')
+  @ApiOperation({ summary: 'Get user chat history' })
+  async getUserChatHistory(
+    @Request() req,
+    @Query('limit') limit: number = 50
+  ) {
+    return this.aiChatService.getUserChatHistory(req.user.id, limit);
+  }
+
+  @Post('verse/:reference')
+  @ApiOperation({ summary: 'Share a Bible verse' })
+  async shareVerse(@Request() req, @Param('reference') verseReference: string) {
+    return this.aiChatService.shareVerse(req.user.id, verseReference);
+  }
+
+  @Post('prayer')
+  @ApiOperation({ summary: 'Create a prayer message' })
+  async writePrayer(@Request() req, @Body('prayer') prayer: string) {
+    return this.aiChatService.writePrayer(req.user.id, prayer);
   }
 } 

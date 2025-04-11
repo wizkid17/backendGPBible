@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseGuards, Request, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Request, HttpCode, HttpStatus, Req, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -6,7 +6,10 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { GoogleAuthGuard } from './guards/google-auth.guard';
 import { InitiateEmailVerificationDto, VerifyEmailDto } from './dto/verify-email.dto';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Request as ExpressRequest, Response } from 'express';
 
+@ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -74,13 +77,18 @@ export class AuthController {
 
   @Get('google')
   @UseGuards(GoogleAuthGuard)
+  @ApiOperation({ summary: 'Initiate Google OAuth login' })
   async googleAuth() {
-    // El guard manejará la redirección
+    // Guard redirects to Google
   }
 
   @Get('google/callback')
   @UseGuards(GoogleAuthGuard)
-  async googleAuthRedirect(@Request() req) {
-    return this.authService.login(req.user);
+  @ApiOperation({ summary: 'Handle Google OAuth callback' })
+  async googleAuthRedirect(@Req() req: ExpressRequest, @Res() res: Response) {
+    const { accessToken, user } = await this.authService.googleLogin(req.user);
+    
+    // You can customize this to redirect to your frontend with the token
+    res.redirect(`${process.env.FRONTEND_URL}/auth/callback?token=${accessToken}`);
   }
 } 

@@ -18,11 +18,8 @@ export class BibleVersion {
   @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column({ type: 'int', nullable: true })
-  year: number;
-
-  @Column({ type: 'text', nullable: true })
-  copyright: string;
+  @Column({ type: 'boolean', default: true })
+  isActive: boolean;
 
   @OneToMany(() => UserPreference, preference => preference.bibleVersion)
   userPreferences: UserPreference[];

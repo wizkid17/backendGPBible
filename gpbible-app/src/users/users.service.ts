@@ -3,33 +3,49 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, MoreThan, In, Not, Like, ILike } from 'typeorm';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {}
 
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const user = this.userRepository.create(createUserDto);
+    return await this.userRepository.save(user);
+  }
+
+  async findById(id: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
   async findByEmail(email: string): Promise<User | null> {
-    return this.usersRepository.findOne({ where: { email } });
+    return await this.userRepository.findOne({ where: { email } });
   }
 
-  async findById(id: string): Promise<User | null> {
-    return this.usersRepository.findOne({ where: { id } });
+  async update(id: string, updateProfileDto: UpdateProfileDto): Promise<User> {
+    const user = await this.findById(id);
+    Object.assign(user, updateProfileDto);
+    return await this.userRepository.save(user);
   }
 
-  async create(userData: {
-    email: string;
-    password: string;
-    firstName?: string;
-    lastName?: string;
-    picture?: string;
-    googleId?: string;
-    birthDate?: Date;
-  }): Promise<User> {
-    const user = this.usersRepository.create(userData);
-    return this.usersRepository.save(user);
+  async updatePicture(id: string, pictureUrl: string): Promise<User> {
+    const user = await this.findById(id);
+    user.picture = pictureUrl;
+    return await this.userRepository.save(user);
+  }
+
+  async markEmailAsVerified(id: string): Promise<User> {
+    const user = await this.findById(id);
+    user.isEmailVerified = true;
+    return await this.userRepository.save(user);
   }
 
   async setResetPasswordToken(email: string): Promise<string> {
@@ -41,12 +57,12 @@ export class UsersService {
     const token = await bcrypt.hash(Math.random().toString(), 10);
     user.resetPasswordToken = token;
     user.resetPasswordExpires = new Date(Date.now() + 3600000); // Token expira en 1 hora
-    await this.usersRepository.save(user);
+    await this.userRepository.save(user);
     return token;
   }
 
   async resetPassword(token: string, newPassword: string): Promise<void> {
-    const user = await this.usersRepository.findOne({
+    const user = await this.userRepository.findOne({
       where: {
         resetPasswordToken: token,
         resetPasswordExpires: MoreThan(new Date()),
@@ -60,27 +76,28 @@ export class UsersService {
     user.password = await bcrypt.hash(newPassword, 10);
     user.resetPasswordToken = null;
     user.resetPasswordExpires = null;
-    await this.usersRepository.save(user);
+    await this.userRepository.save(user);
   }
 
   async findOrCreateGoogleUser(googleProfile: any): Promise<User> {
-    let user = await this.usersRepository.findOne({
-      where: [
-        { googleId: googleProfile.id },
-        { email: googleProfile.email }
-      ]
-    });
+    let user = await this.findByEmail(googleProfile.email);
 
     if (!user) {
-      const randomPassword = await bcrypt.hash(Math.random().toString(), 10);
+      // Crear nuevo usuario
       user = await this.create({
         email: googleProfile.email,
-        password: randomPassword,
-        googleId: googleProfile.id,
         firstName: googleProfile.firstName,
         lastName: googleProfile.lastName,
-        picture: googleProfile.picture
+        picture: googleProfile.picture,
+        googleId: googleProfile.id,
+        isEmailVerified: true, // Los usuarios de Google ya tienen email verificado
+        password: Math.random().toString(36), // Contraseña aleatoria ya que usará Google
       });
+    } else if (!user.googleId) {
+      // Actualizar usuario existente con datos de Google
+      user.googleId = googleProfile.id;
+      user.picture = googleProfile.picture || user.picture;
+      await this.userRepository.save(user);
     }
 
     return user;
@@ -88,7 +105,7 @@ export class UsersService {
 
   async findByIds(ids: string[]): Promise<User[]> {
     if (!ids.length) return [];
-    return this.usersRepository.find({
+    return this.userRepository.find({
       where: { id: In(ids) }
     });
   }
@@ -96,7 +113,7 @@ export class UsersService {
   async findAll(options?: { limit?: number; offset?: number; excludeIds?: string[] }): Promise<User[]> {
     const { limit = 50, offset = 0, excludeIds = [] } = options || {};
     
-    const queryBuilder = this.usersRepository.createQueryBuilder('user');
+    const queryBuilder = this.userRepository.createQueryBuilder('user');
     
     if (excludeIds.length) {
       queryBuilder.where('user.id NOT IN (:...excludeIds)', { excludeIds });
@@ -113,7 +130,7 @@ export class UsersService {
     }
 
     // Buscar usuarios que coincidan con el email o nombre
-    const users = await this.usersRepository.find({
+    const users = await this.userRepository.find({
       where: [
         { email: ILike(`%${query}%`), id: Not(currentUserId) },
         { firstName: ILike(`%${query}%`), id: Not(currentUserId) },
@@ -137,6 +154,14 @@ export class UsersService {
     user.contactPermissionRequested = true;
     user.contactPermissionGranted = granted;
     
-    return this.usersRepository.save(user);
+    return this.userRepository.save(user);
+  }
+
+  async findByResetToken(token: string): Promise<User | null> {
+    return await this.userRepository.findOne({
+      where: {
+        resetPasswordToken: token,
+      },
+    });
   }
 } 
